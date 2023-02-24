@@ -58,7 +58,7 @@ public class SceneView extends SurfaceView implements Choreographer.FrameCallbac
      * animation update time. The input nano time can be used to ensure that returned times never
      * decrease.
      *
-     * @see {@link SceneView#setAnimationTimeTransformer(AnimationTimeTransformer)}
+     * @see {@link SceneView #setAnimationTimeTransformer(AnimationTimeTransformer)}
      * @param choreographerTime the current frame time returned from the {@link Choreographer}.
      */
     long getAnimationTime(long choreographerTime);

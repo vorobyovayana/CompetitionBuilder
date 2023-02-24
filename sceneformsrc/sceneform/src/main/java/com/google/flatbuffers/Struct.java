@@ -36,7 +36,7 @@ public class Struct {
    * due to {@code ByteBuffer} references. The instance will be unusable until it is assigned
    * again to a {@code ByteBuffer}.
    *
-   * @param struct the instance to reset to initial state
+   * struct the instance to reset to initial state
    */
   public void __reset() {
     bb = null;

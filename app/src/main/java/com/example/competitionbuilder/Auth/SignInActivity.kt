@@ -1,9 +1,10 @@
-package com.example.competitionbuilder
+package com.example.competitionbuilder.Auth
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.competitionbuilder.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.example.competitionbuilder.databinding.ActivitySignInBinding
 
@@ -35,7 +36,6 @@ class SignInActivity : AppCompatActivity() {
                         startActivity(intent)
                     } else {
                         Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
-
                     }
                 }
             } else {

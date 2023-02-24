@@ -1,4 +1,4 @@
-package com.example.competitionbuilder
+package com.example.competitionbuilder.Auth
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
