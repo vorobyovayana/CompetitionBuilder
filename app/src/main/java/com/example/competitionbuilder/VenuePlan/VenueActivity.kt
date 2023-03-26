@@ -14,6 +14,7 @@ class VenueActivity : AppCompatActivity() {
     private lateinit var editTextHeight: EditText
     private lateinit var  txtViewNumStrips: TextView
     private lateinit var btnGoToStrips: Button
+    private lateinit var rectangle: RectangleView
 
     var width = 0F;
     var height = 0F;
@@ -33,8 +34,9 @@ class VenueActivity : AppCompatActivity() {
             width = editTextWidth.text.toString().toFloat()
             height = editTextHeight.text.toString().toFloat()
 
-            val rectangle = findViewById<RectangleView>(R.id.rectangle_view)
+            rectangle = findViewById<RectangleView>(R.id.rectangle_view)
             rectangle.setDimensions(width, height)
+
 
             val numStrips = getNumStrips(width, height)
             txtViewNumStrips.setText(numStrips.toString())
@@ -45,6 +47,8 @@ class VenueActivity : AppCompatActivity() {
 
             intent.putExtra("width", width)
             intent.putExtra("height", height)
+            intent.putExtra("rectViewWidth", rectangle.measuredWidth)
+            intent.putExtra("rectViewHeight", rectangle.measuredHeight)
             startActivity(intent)
         }
     }

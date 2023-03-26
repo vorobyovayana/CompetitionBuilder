@@ -68,11 +68,6 @@ class LayoutActivity : AppCompatActivity() {
                 }
             }
 
-
-//            fun onTouch(view: View?, motionEvent: MotionEvent?): Boolean {
-//                Log.d("GESTUREDEMO", "Entered onTouch from textView")
-//                return super.onTouch((view)!!, (motionEvent)!!)
-//            }
         })
 
     }
