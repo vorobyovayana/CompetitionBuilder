@@ -19,6 +19,8 @@ class LayoutActivity : AppCompatActivity() {
     var height = 0F
     var rectViewWidth = 0
     var rectViewHeight = 0
+    var oneMeter = 0F
+
     private lateinit var pisteView: PisteView
     private lateinit var btnBack: Button
     var position : Boolean = false
@@ -46,6 +48,8 @@ class LayoutActivity : AppCompatActivity() {
         pisteView.setRectWidth(rectViewWidth)
         pisteView.setRectHeight(rectViewHeight)
         Log.d("rectViewWidth.layout",rectViewWidth.toString())
+        oneMeter = rectViewWidth/width
+        pisteView.setOneMeter(oneMeter)
         pisteView.setDimensions(17f, 3f)
         // position = true -- means the piste is positioned horizontally,
         // false -- vertically
@@ -74,19 +78,12 @@ class LayoutActivity : AppCompatActivity() {
 
 
 
-//        val oneMeter = rectViewWidth/width.toInt()
-//        Log.d("rectW.layout", rectViewWidth.toString())
-//        Log.d("rectH.layout", rectViewHeight.toString())
-        //Log.d("aspectRation",aspectRatio.toString() )
-
 
 
         btnBack.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
-
-//        pisteView.setDimensions(17f*(17f/width), 3f*(17f/width))
 
 
 

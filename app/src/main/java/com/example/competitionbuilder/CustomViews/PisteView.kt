@@ -14,10 +14,11 @@ class PisteView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
 
     private var width: Float = 0F
     private var height: Float = 0F
-    private var oneMeter: Int = 0
+    private var oneMeter: Float = 0F
 
     private var rectWidth: Int = 0
     private var rectHeight: Int = 0
+
 
 
 
@@ -32,7 +33,7 @@ class PisteView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
         invalidate()
     }
 
-    fun setOneMeter(oneM: Int){
+    fun setOneMeter(oneM: Float){
         this.oneMeter = oneM
         invalidate()
     }
@@ -85,20 +86,31 @@ class PisteView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
         if (viewAspectRatio > pisteAspectRatio) {
             //pisteWidth = (canvas.height * pisteAspectRatio).toInt()
             //pisteWidth = (953*pisteAspectRatio).toInt()
-            pisteWidth = (this.rectHeight * pisteAspectRatio).toInt()
-            Log.d("pisteWidth", pisteWidth.toString())
-            // D/pisteWidth: 145
+//            pisteWidth = (this.rectHeight * pisteAspectRatio).toInt()
+//            Log.d("pisteWidth", pisteWidth.toString())
 
-            pisteHeight = this.rectHeight
-            Log.d("pisteHeight",pisteHeight.toString())
+            // 806 - rectViewWidth
+            // 806/20 = 40.3 pix per meter
+            pisteWidth = (this.width*this.oneMeter).toInt()
+            Log.d("pisteWidth", pisteWidth.toString())
+            Log.d("oneMeter", oneMeter.toString())
+
+//            pisteHeight = this.rectHeight
+//            Log.d("pisteHeight",pisteHeight.toString())
             //D/pisteHeight: 822
+            pisteHeight = (this.height*this.oneMeter).toInt()
+            Log.d("pisteHeight",pisteHeight.toString())
         } else {
             //pisteWidth = canvas.width
-            pisteWidth = this.rectWidth
+            //pisteWidth = this.rectWidth
             // D/pisteWidth: 145
+            pisteWidth = (this.width*this.oneMeter).toInt()
+            Log.d("pisteWidth", pisteWidth.toString())
 
-            pisteHeight = (this.rectWidth/ pisteAspectRatio).toInt()
+            //pisteHeight = (this.rectWidth/ pisteAspectRatio).toInt()
             //D/pisteHeight: 822
+            pisteHeight = (this.height*this.oneMeter).toInt()
+            Log.d("pisteHeight",pisteHeight.toString())
         }
 
         // Calculate the position of the rectangle in the view
