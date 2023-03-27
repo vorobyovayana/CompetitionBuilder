@@ -55,8 +55,8 @@
 
     <com.example.competitionbuilder.CustomViews.RectangleView
         android:id="@+id/rectangle_view"
-        android:layout_width="335dp"
-        android:layout_height="363dp"
+        android:layout_width="307dp"
+        android:layout_height="313dp"
 
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"

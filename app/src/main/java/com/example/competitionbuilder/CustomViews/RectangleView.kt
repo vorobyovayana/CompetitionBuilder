@@ -16,6 +16,9 @@ class RectangleView @JvmOverloads constructor(
 
     private var width: Float = 0F
     private var height: Float = 0F
+    private var viewWidth: Int = 0
+    private var viewHeight: Int = 0
+
     private var rectAspectRatio: Float = 0F
 
 
@@ -27,11 +30,26 @@ class RectangleView @JvmOverloads constructor(
         return width / height
     }
 
+    fun getViewWidth(): Int{
+        return viewWidth
+    }
+
+    fun getViewHeight(): Int{
+        return viewHeight
+    }
+
+    fun setViewHeight(vHeight: Int){
+        this.viewHeight = vHeight
+    }
+    fun setViewWidth(vWidth: Int){
+        this.viewWidth = vWidth
+    }
+
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
-        val viewWidth = measuredWidth
-        val viewHeight = measuredHeight
+        viewWidth = measuredWidth
+        viewHeight = measuredHeight
 
         Log.d("viewWidth", viewWidth.toString());
         //  D/viewWidth: 853
@@ -52,7 +70,10 @@ class RectangleView @JvmOverloads constructor(
         // Calculate the aspect ratio of the rectangle
         this.setRectAspectRatio(width.toFloat() / height.toFloat())
         Log.d("setRectAspectRatio", this.rectAspectRatio.toString())
-
+        this.setViewWidth(viewWidth)
+        Log.d("this.setViewWidth", viewWidth.toString())
+        Log.d("this.getViewWidth", this.getViewWidth().toString())
+        this.setViewHeight(viewHeight)
         // Calculate the aspect ratio of the view
         val viewAspectRatio = canvas.width.toFloat() / canvas.height.toFloat()
 

@@ -21,6 +21,7 @@ open class CustomTouchListener(var context: Context) : View.OnTouchListener {
             onDoubleClick()
             return super.onDoubleTap(e)
         }
+
     }
 
     open fun onDoubleClick() {
