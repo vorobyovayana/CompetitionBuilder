@@ -22,6 +22,10 @@ open class CustomTouchListener(var context: Context) : View.OnTouchListener {
             return super.onDoubleTap(e)
         }
 
+        override fun onLongPress(e: MotionEvent) {
+            onDrag()
+            super.onLongPress(e)
+        }
     }
 
     open fun onDoubleClick() {
@@ -31,10 +35,19 @@ open class CustomTouchListener(var context: Context) : View.OnTouchListener {
         )
     }
 
+    open fun onDrag() {
+        Log.d(
+            "GESTURE_DETECTOR",
+            "Detected drag in the custom touch listener"
+        )
+    }
+
     override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
         //return false; //must return gesture detector's onTouchEvent
         return gestureDetectorCompat.onTouchEvent(motionEvent)
     }
+
+
 
     init {
         gestureDetectorCompat = GestureDetectorCompat(
