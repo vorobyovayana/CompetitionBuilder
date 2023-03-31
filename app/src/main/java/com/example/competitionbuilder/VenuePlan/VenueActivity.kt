@@ -3,7 +3,6 @@ package com.example.competitionbuilder.VenuePlan
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -19,14 +18,15 @@ class VenueActivity : AppCompatActivity() {
 
     var width = 0F;
     var height = 0F;
+    var numStrips = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_venue)
 
-        editTextWidth = findViewById(R.id.editTextWidth)
-        editTextHeight = findViewById(R.id.editTextHeight)
+        editTextWidth = findViewById(R.id.editTextLength)
+        editTextHeight = findViewById(R.id.editTextWidth)
         txtViewNumStrips = findViewById(R.id.txtViewNumStrips)
         btnGoToStrips = findViewById(R.id.btnGoToStrips)
 
@@ -39,8 +39,8 @@ class VenueActivity : AppCompatActivity() {
             rectangle = findViewById<RectangleView>(R.id.rectangle_view)
             rectangle.setDimensions(width, height)
 
-            val numStrips = getNumStrips(width, height)
-            txtViewNumStrips.setText(numStrips.toString())
+            numStrips = getNumStrips(width, height)
+            txtViewNumStrips.setText("You can fit " + numStrips.toString() + " fencing strips in your venue")
 
         }
         btnGoToStrips.setOnClickListener {
@@ -50,6 +50,7 @@ class VenueActivity : AppCompatActivity() {
             intent.putExtra("height", height)
             intent.putExtra("rectViewWidth", rectangle.measuredWidth)
             intent.putExtra("rectViewHeight", rectangle.measuredHeight)
+            intent.putExtra("numStrips", numStrips)
             startActivity(intent)
         }
     }

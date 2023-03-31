@@ -2,6 +2,7 @@ package com.example.competitionbuilder.CustomTouchListeners
 
 import android.content.Context
 import android.util.Log
+import android.view.DragEvent
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
@@ -16,12 +17,10 @@ open class CustomTouchListener(var context: Context) : View.OnTouchListener {
             return true
             // return super.onDown(e); //base class onDown returns false, must not be used here
         }
-
         override fun onDoubleTap(e: MotionEvent): Boolean {
             onDoubleClick()
             return super.onDoubleTap(e)
         }
-
         override fun onLongPress(e: MotionEvent) {
             onDrag()
             super.onLongPress(e)

@@ -84,7 +84,7 @@ class ARActivity : AppCompatActivity() {
                 if (clickNo == 1) {
                     val anchor = hitResult.createAnchor()
                     ModelRenderable.builder()
-                        .setSource(this, R.raw.piste_basic)
+                        .setSource(this, R.raw.piste_basic_katushki_sm2)
                         .setIsFilamentGltf(true)
                         .build()
                         .thenAccept(Consumer { modelRenderable: ModelRenderable? ->

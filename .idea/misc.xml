@@ -6,13 +6,13 @@
         <entry key="../../../../../../../../layout/custom_preview.xml" value="0.2755208333333333" />
         <entry key="app/src/main/res/layout/activity_ar.xml" value="0.22552083333333334" />
         <entry key="app/src/main/res/layout/activity_aractivity.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_layout.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.20572916666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.20572916666666666" />
         <entry key="app/src/main/res/layout/activity_plan.xml" value="0.19166666666666668" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.2947916666666667" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.2947916666666667" />
-        <entry key="app/src/main/res/layout/activity_venue.xml" value="0.14635416666666667" />
+        <entry key="app/src/main/res/layout/activity_venue.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_ar.xml" value="0.22552083333333334" />
       </map>
     </option>

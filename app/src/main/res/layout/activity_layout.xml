@@ -18,27 +18,23 @@
 
     <com.example.competitionbuilder.CustomViews.PisteView
         android:id="@+id/piste_view"
-        android:layout_width="307dp"
-        android:layout_height="313dp"
+        android:layout_width="310dp"
+        android:layout_height="253dp"
 
-        android:layout_marginBottom="60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rectangle_view"
-        app:layout_constraintVertical_bias="0.56"
-
         tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/btnBack"
+    <TextView
+        android:id="@+id/txtViewAvailablePistes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go back"
+        android:text="@string/txtAvailablePistes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/piste_view"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/piste_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

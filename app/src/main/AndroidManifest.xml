@@ -26,12 +26,7 @@
         <activity
             android:name=".VenuePlan.VenueActivity"
             android:exported="false" />
-        <activity
-            android:name=".PlanActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Plan"
-            android:exported="false" />
+
         <activity
             android:name=".AR.ARActivity"
             android:exported="false" />
