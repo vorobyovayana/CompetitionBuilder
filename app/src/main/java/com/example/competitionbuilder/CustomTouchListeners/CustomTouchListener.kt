@@ -11,6 +11,10 @@ import androidx.core.view.GestureDetectorCompat
 open class CustomTouchListener(var context: Context) : View.OnTouchListener {
     var gestureDetectorCompat: GestureDetectorCompat
 
+    var dX = 0f
+    var dY = 0f
+
+
     inner class CustomGestureListener : GestureDetector.SimpleOnGestureListener() {
 
         override fun onDown(e: MotionEvent): Boolean {
@@ -21,9 +25,10 @@ open class CustomTouchListener(var context: Context) : View.OnTouchListener {
             onDoubleClick()
             return super.onDoubleTap(e)
         }
+
         override fun onLongPress(e: MotionEvent) {
-            onDrag()
-            super.onLongPress(e)
+            onMove(e)
+            return super.onLongPress(e)
         }
     }
 
@@ -34,19 +39,19 @@ open class CustomTouchListener(var context: Context) : View.OnTouchListener {
         )
     }
 
-    open fun onDrag() {
+    open fun onMove(motionEvent: MotionEvent){
         Log.d(
             "GESTURE_DETECTOR",
-            "Detected drag in the custom touch listener"
+            "Detected move in the custom touch listener"
         )
     }
 
     override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
         //return false; //must return gesture detector's onTouchEvent
+
+
         return gestureDetectorCompat.onTouchEvent(motionEvent)
     }
-
-
 
     init {
         gestureDetectorCompat = GestureDetectorCompat(
