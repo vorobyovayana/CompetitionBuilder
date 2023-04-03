@@ -69,10 +69,7 @@ class RectangleView @JvmOverloads constructor(
 
         // Calculate the aspect ratio of the rectangle
         this.setRectAspectRatio(width.toFloat() / height.toFloat())
-        Log.d("setRectAspectRatio", this.rectAspectRatio.toString())
         this.setViewWidth(viewWidth)
-        Log.d("this.setViewWidth", viewWidth.toString())
-        Log.d("this.getViewWidth", this.getViewWidth().toString())
         this.setViewHeight(viewHeight)
         // Calculate the aspect ratio of the view
         val viewAspectRatio = canvas.width.toFloat() / canvas.height.toFloat()

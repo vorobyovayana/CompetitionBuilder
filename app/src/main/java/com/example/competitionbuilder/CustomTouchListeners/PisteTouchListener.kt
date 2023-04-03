@@ -23,6 +23,9 @@ class PisteTouchListener : View.OnTouchListener {
             MotionEvent.ACTION_DOWN -> {
                 dX = view.x - x
                 dY = view.y - y
+                Log.d("StartX", dX.toString())
+                Log.d("StartY", dY.toString())
+                Log.d("Move", "Move on Piste  is detected")
             }
 
             MotionEvent.ACTION_MOVE -> {
@@ -31,6 +34,8 @@ class PisteTouchListener : View.OnTouchListener {
                     .y(y + dY)
                     .setDuration(0)
                     .start()
+                Log.d("EndX", dX.toString())
+                Log.d("EndY", dY.toString())
             }
 
             else -> return false

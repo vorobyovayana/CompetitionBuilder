@@ -4,11 +4,15 @@ import android.app.Activity
 import android.app.ActivityManager
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.MotionEvent
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import com.example.competitionbuilder.MainActivity
 import com.example.competitionbuilder.R
 import com.google.ar.core.Anchor
 import com.google.ar.core.HitResult
@@ -74,6 +78,10 @@ class ARActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_aractivity)
+        val actionBar: ActionBar? = supportActionBar
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true)
+        }
 
         if (this.checkSystemSupport(this)){
             //ArFragment is linked up with its respective id used in the activity_aractivity.xml
@@ -105,6 +113,16 @@ class ARActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "Not returning anything", Toast.LENGTH_SHORT).show()
             return
+        }
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

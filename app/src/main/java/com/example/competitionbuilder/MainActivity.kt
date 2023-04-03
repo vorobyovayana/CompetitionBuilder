@@ -3,6 +3,7 @@ package com.example.competitionbuilder
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.competitionbuilder.AR.ARActivity
 import com.example.competitionbuilder.Auth.SignInActivity
@@ -18,6 +19,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+//        val actionBar: ActionBar? = supportActionBar
+//        if (actionBar != null) {
+//            actionBar.setDisplayHomeAsUpEnabled(true)
+//        }
 
         binding.btnLogOut.setOnClickListener {
             FirebaseAuth.getInstance().signOut();

@@ -6,26 +6,62 @@
     android:layout_height="match_parent"
     tools:context=".VenuePlan.LayoutActivity">
 
-    <com.example.competitionbuilder.CustomViews.RectangleView
-        android:id="@+id/rectangle_view"
-        android:layout_width="307dp"
-        android:layout_height="313dp"
 
+    <RelativeLayout
+        android:id="@+id/parentView"
+        android:layout_width="413dp"
+        android:layout_height="706dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="51dp" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <com.example.competitionbuilder.CustomViews.PisteView
-        android:id="@+id/piste_view"
-        android:layout_width="310dp"
-        android:layout_height="253dp"
+        <com.example.competitionbuilder.CustomViews.PisteView
+            android:id="@+id/piste_view"
+            android:layout_width="307dp"
+            android:layout_height="313dp"
+            android:layout_below="@+id/rectangle_view"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="61dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginEnd="46dp"
+            android:layout_marginBottom="47dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/parentView"
+            tools:ignore="MissingConstraints,NotSibling" />
 
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rectangle_view"
-        tools:ignore="MissingConstraints" />
+        <com.example.competitionbuilder.CustomViews.RectangleView
+            android:id="@+id/rectangle_view"
+            android:layout_width="307dp"
+            android:layout_height="313dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="61dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="45dp"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/btnAddView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/piste_view"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="256dp"
+            android:layout_marginTop="249dp"
+            android:layout_marginEnd="63dp"
+            android:layout_marginBottom="55dp"
+            android:text="Button" />
+
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/txtViewAvailablePistes"

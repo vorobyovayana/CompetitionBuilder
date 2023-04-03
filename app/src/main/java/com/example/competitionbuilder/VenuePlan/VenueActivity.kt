@@ -1,12 +1,17 @@
 package com.example.competitionbuilder.VenuePlan
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import com.example.competitionbuilder.CustomViews.RectangleView
+
+
+import com.example.competitionbuilder.MainActivity
 import com.example.competitionbuilder.R
 
 class VenueActivity : AppCompatActivity() {
@@ -54,6 +59,18 @@ class VenueActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     fun getNumStrips(venueWidth: Float, venueHeight: Float): Int {
         val venueArea = venueHeight * venueWidth;
         // assuming that we need 20 m length and 5 m width
