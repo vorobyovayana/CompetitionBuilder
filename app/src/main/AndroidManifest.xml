@@ -21,20 +21,10 @@
         android:theme="@style/Theme.CompetitionBuilder"
         tools:targetApi="31">
         <activity
-            android:name=".VenuePlan.LayoutActivity"
+            android:name=".InfoActivity"
             android:exported="false" />
         <activity
-            android:name=".VenuePlan.VenueActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".AR.ARActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Auth.SignUpActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Auth.SignInActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,8 +33,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".VenuePlan.LayoutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".VenuePlan.VenueActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AR.ARActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Auth.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Auth.SignInActivity"
             android:exported="true" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            />
 
         <meta-data
             android:name="com.google.ar.core"

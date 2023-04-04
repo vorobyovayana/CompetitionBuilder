@@ -32,19 +32,17 @@ class PisteView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
         return this.pisteHeight
     }
 
-
-
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
         val paint = Paint().apply {
-            color = Color.GREEN
+            color = Color.parseColor("7900FF")
             style = Paint.Style.STROKE
             strokeWidth = 8f
         }
 
         val dashPaint = Paint().apply {
-            color = Color.GREEN
+            color = Color.parseColor("36454F")
             style = Paint.Style.STROKE
             strokeWidth = 4f
             pathEffect = android.graphics.DashPathEffect(floatArrayOf(20f, 20f), 0f)

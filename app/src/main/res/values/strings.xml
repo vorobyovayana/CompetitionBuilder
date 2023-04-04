@@ -10,6 +10,8 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="txtLogout">Log out</string>
+    <string name="txtRules">Read about equipment regulations</string>
+    <string name="txtHello">Hello, </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="txtViewAr">View AR</string>
@@ -18,5 +20,9 @@
     <string name="txtEnterDims">Please enter the dimensions of your venue in meters</string>
     <string name="txtProceed">Proceed</string>
     <string name="txtAvailablePistes">Num available pistes</string>
-
+    <string name="txtSlide1">Fencing strips, scoring machines, and reels are essential components of any fencing competition or training session.</string>
+    <string name="txtSlide2">Fencing strips are long, narrow mats that are used as the playing surface for fencers. They are typically made of rubber or carpet and are about 14 meters long and 1.5 to 2 meters wide. The strip should be set up in a well-lit and ventilated area, with enough space around it to allow for safe movement by fencers</string>
+    <string name="txtSlide3">Scoring machines are electronic devices that keep track of points scored during a fencing match. They consist of a control box, a scoring apparatus, and a power source. The scoring apparatus is connected to the fencing strips and registers hits made by the fencers. The control box displays the score and controls the timing of the match.Reels are used to keep the electrical cables that connect the scoring apparatus to the scoring machine organized and tangle-free. They are typically mounted on the wall near the scoring machine and are connected to the scoring apparatus by a cable.</string>
+    <string name="txtSlide4">The cables from the fencers weapons are plugged into the reels, which then feed the signals to the scoring machine.When setting up a fencing competition or training session, it is important to ensure that all of these components are working properly and are set up according to the rules and regulations of the competition. This typically involves testing the scoring machines, checking the fencing strips for any damage or defects, and making sure that the reels are properly mounted and functioning correctly.</string>
+    <string name="txtSlideNum">1/4</string>
 </resources>
