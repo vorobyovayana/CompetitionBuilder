@@ -9,11 +9,11 @@
 
     <RelativeLayout
         android:id="@+id/parentView"
-        android:layout_width="413dp"
-        android:layout_height="706dp"
+        android:layout_width="409dp"
+        android:layout_height="743dp"
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -25,10 +25,10 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="61dp"
-            android:layout_marginTop="33dp"
-            android:layout_marginEnd="46dp"
-            android:layout_marginBottom="47dp"
+            android:layout_marginStart="59dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="66dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/parentView"
@@ -46,31 +46,39 @@
             android:layout_marginEnd="45dp"
             tools:ignore="MissingConstraints" />
 
-        <Button
-            android:id="@+id/btnAddView"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_alignStart="@+id/piste_view"
+            android:layout_alignTop="@+id/piste_view"
+            android:layout_alignBottom="@+id/piste_view"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="254dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="289dp"
+            android:clickable="true"
+            android:color="@color/charcoal"
+            app:rippleColor="@color/charcoal"
+            app:srcCompat="@drawable/ic_baseline_add_24" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabNext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/piste_view"
+            android:layout_alignBottom="@+id/piste_view"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="256dp"
-            android:layout_marginTop="249dp"
-            android:layout_marginEnd="63dp"
-            android:layout_marginBottom="55dp"
-            android:text="Button" />
+            android:layout_marginStart="307dp"
+            android:layout_marginTop="197dp"
+            android:layout_marginEnd="46dp"
+            android:layout_marginBottom="99dp"
+            android:clickable="true"
+            app:srcCompat="@drawable/ic_baseline_save_24" />
 
 
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/txtViewAvailablePistes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txtAvailablePistes"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/piste_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,8 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
 
     <uses-feature
         android:name="android.hardware.camera.ar"
@@ -20,6 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CompetitionBuilder"
         tools:targetApi="31">
+        <activity
+            android:name=".VenuePlan.ResultActivity"
+            android:exported="false" />
         <activity
             android:name=".InfoActivity"
             android:exported="false" />
@@ -49,8 +54,7 @@
             android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            />
+            android:exported="true" />
 
         <meta-data
             android:name="com.google.ar.core"

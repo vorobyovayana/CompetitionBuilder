@@ -62,7 +62,7 @@ class RectangleView @JvmOverloads constructor(
         super.onDraw(canvas)
 
         val paint = Paint().apply {
-            color = Color.RED
+            color = Color.parseColor("#7900FF")
             style = Paint.Style.STROKE
             strokeWidth = 8f
         }

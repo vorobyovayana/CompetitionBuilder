@@ -3,7 +3,9 @@ package com.example.competitionbuilder.VenuePlan
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -11,6 +13,7 @@ import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.Button
 import android.widget.RelativeLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 
@@ -19,6 +22,9 @@ import com.example.competitionbuilder.CustomViews.PisteView
 import com.example.competitionbuilder.CustomViews.RectangleView
 import com.example.competitionbuilder.MainActivity
 import com.example.competitionbuilder.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.io.File
+import java.io.FileOutputStream
 
 class LayoutActivity : AppCompatActivity() {
     var width = 0F
@@ -28,12 +34,10 @@ class LayoutActivity : AppCompatActivity() {
     var oneMeter = 0F
     var numStrips = 0
 
-    var dX = 0f
-    var dY = 0f
 
     private lateinit var pisteView: PisteView
-    private lateinit var btnBack: Button
-    private lateinit var btnAdd: Button
+    private lateinit var btnAdd: FloatingActionButton
+    private lateinit var btnNext: FloatingActionButton
     var position : Boolean = false
 
     @SuppressLint("ClickableViewAccessibility")
@@ -73,8 +77,6 @@ class LayoutActivity : AppCompatActivity() {
         // false -- vertically
         position = true
 
-        val txtViewAvailablePistes = findViewById<TextView>(R.id.txtViewAvailablePistes)
-        txtViewAvailablePistes.setText("You have "+ numStrips.toString() + " fencing pistes left to put on your venue")
 
 //         Set onTouchListener to move the view OnTouch()
         val pisteTouchListener = PisteTouchListener()
@@ -103,7 +105,7 @@ class LayoutActivity : AppCompatActivity() {
 //        })
 
         val parentView = findViewById<RelativeLayout>(R.id.parentView)
-        btnAdd = findViewById(R.id.btnAddView)
+        btnAdd = findViewById(R.id.fabAdd)
         btnAdd.setOnClickListener {
             Log.d("AddView", "Attempt to add a view detected")
             val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -133,9 +135,24 @@ class LayoutActivity : AppCompatActivity() {
             newPisteView.setDimensions(17f, 3f)
             newPisteView.layoutParams = layoutParams
 
+            if(numStrips>0){
+                numStrips-=1
+                val pistesLeft = numStrips.toString()+ " left"
+                Toast.makeText(this, pistesLeft, Toast.LENGTH_SHORT).show()
+            }
+            else{
+                Toast.makeText(this, "No more pistes left, use the ones that you already have!", Toast.LENGTH_SHORT).show()
+            }
 
             newPisteView.setOnTouchListener(pisteTouchListener)
             Log.d("pisteWidth", newPisteView.getPisteWidth().toString())
+        }
+
+        btnNext = findViewById(R.id.fabNext)
+        btnNext.setOnClickListener{
+//            val new_intent = Intent(this, ResultActivity::class.java)
+//            startActivity(new_intent)
+            saveLayout()
         }
 
         }
@@ -148,6 +165,24 @@ class LayoutActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    fun saveLayout(){
+        val rootView = window.decorView.rootView
+        rootView.isDrawingCacheEnabled = true
+        val bitmap = Bitmap.createBitmap(rootView.drawingCache)
+        val directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+
+        rootView.isDrawingCacheEnabled = false
+        val file = File(directory, "layout_image.jpg")
+        val outputStream = FileOutputStream(file)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+        outputStream.flush()
+        outputStream.close()
+        Toast.makeText(this, "Layout image saved successfully", Toast.LENGTH_SHORT).show()
+        outputStream.close()
+        bitmap.recycle()
+
     }
 
 //        btnBack.setOnClickListener {

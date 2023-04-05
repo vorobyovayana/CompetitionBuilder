@@ -30,7 +30,7 @@ open class CustomTouchListener(var context: Context) : View.OnTouchListener {
         }
 
         override fun onLongPress(e: MotionEvent) {
-            onMove(e)
+            onLongClick(e)
             return super.onLongPress(e)
         }
 
@@ -68,6 +68,14 @@ open class CustomTouchListener(var context: Context) : View.OnTouchListener {
             return super.onFling(e1, e2, velocityX, velocityY)
             }
         }
+
+    private fun onLongClick(e: MotionEvent) {
+        Log.d(
+            "GESTURE_DETECTOR",
+            "Detected long click in the custom touch listener"
+        )
+
+    }
 
     open fun onSwipeLeft() {
         Log.d(
