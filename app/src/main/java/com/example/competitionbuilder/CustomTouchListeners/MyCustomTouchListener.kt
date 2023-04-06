@@ -1,16 +1,12 @@
-import android.content.Context
 import android.content.Intent
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
-import androidx.core.view.GestureDetectorCompat
 import com.example.competitionbuilder.CustomViews.PisteView
 import com.example.competitionbuilder.VenuePlan.PopUpWindow
 
-class MyCustomTouchListener(private val pisteView: PisteView): View.OnTouchListener {
+open class MyCustomTouchListener(private val pisteView: PisteView): View.OnTouchListener {
 
     private var initialX: Float = 0.toFloat()
     private var initialY: Float = 0.toFloat()
@@ -36,31 +32,20 @@ class MyCustomTouchListener(private val pisteView: PisteView): View.OnTouchListe
         }
 
         override fun onDoubleTap(e: MotionEvent): Boolean {
-//            return super.onDoubleTap(e)
-            try {
-                // Update the dimensions of the PisteView here
-                Log.d("CUSTOMTOUCHLISTENER", "Double click detected")
-                if(pisteView.getIsVertical()){
-                    Log.d("PISTE_POS", pisteView.getIsVertical().toString())
-                    pisteView.setDimensions(3f, 17f)
-                    pisteView.setIsVertical(true)
-                }else{
-                    Log.d("PISTE_POS_ELSE", pisteView.getIsVertical().toString())
-                    pisteView.setDimensions(17f, 3f)
-                    pisteView.setIsVertical(false)
-                }
-            }
-            catch (ex: Exception) {
-                ex.printStackTrace()
-            }
-
-            return true
-
+            onDoubleClick()
+            return super.onDoubleTap(e)
         }
     })
 
-    override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+    open fun onDoubleClick(){
+        Log.d(
+            "GESTUREDEMO",
+            "Detected double click in the custom touch listener"
+        )
+    }
 
+
+    override fun onTouch(v: View?, event: MotionEvent?): Boolean {
         if (event != null) {
             gestureDetector.onTouchEvent(event)
         }
@@ -80,27 +65,7 @@ class MyCustomTouchListener(private val pisteView: PisteView): View.OnTouchListe
                 return true
             }
             MotionEvent.ACTION_UP -> {
-//                val now = System.currentTimeMillis()
-//                val doubleTap: Boolean = now - lastTapTime < DOUBLE_TAP_TIMEOUT
-//                lastTapTime = now
-//                if (doubleTap) {
-//                    // TODO: implement double click
-//                    Log.d("CUSTOMTOUCHLISTENER", "Double click detected")
-//                    try {
-//                        // Update the dimensions of the PisteView here
-//                        Log.d("CUSTOMTOUCHLISTENER", "Double click detected")
-//                        if(pisteView.getIsVertical()){
-//                            pisteView.setDimensions(3f, 17f)
-//                            pisteView.setIsVertical(true)
-//                        }else{
-//                            pisteView.setDimensions(17f, 3f)
-//                            pisteView.setIsVertical(false)
-//                        }
-//                    }
-//                    catch (ex: Exception) {
-//                        ex.printStackTrace()
-//                    }
-//                }
+
                 return true
             }
             MotionEvent.ACTION_CANCEL -> {

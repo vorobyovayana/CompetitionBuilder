@@ -35,13 +35,6 @@ class PisteView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
         return this.isVertical
     }
 
-    fun getPisteWidth(): Int{
-        return this.pisteWidth
-    }
-    fun getPisteHeight(): Int{
-        return this.pisteHeight
-    }
-
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
@@ -89,14 +82,16 @@ class PisteView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
         val dashRect = RectF(rectLeft - 20f, rectTop - 20f, rectRight + 20f, rectBottom + 20f)
         canvas.drawRect(dashRect, dashPaint)
 
-        Log.d("OnDraw", pisteHeight.toString())
-        Log.d("OnDraw", pisteWidth.toString())
+        Log.d("Doubleclicktest", pisteHeight.toString())
+        Log.d("Doubleclicktest", pisteWidth.toString())
     }
 
     fun setDimensions(width: Float, height: Float) {
         this.width = width
         this.height = height
-        Log.d("REDRAW", "trying to redraw")
+        Log.d("Doubleclicktest", "trying to redraw")
+        Log.d("Doubleclicktest", this.width.toString()+"this is width")
+        Log.d("Doubleclicktest", this.height.toString())
         invalidate()
     }
 
