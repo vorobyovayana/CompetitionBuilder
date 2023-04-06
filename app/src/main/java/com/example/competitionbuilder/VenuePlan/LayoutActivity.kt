@@ -81,19 +81,6 @@ class LayoutActivity : AppCompatActivity() {
             override fun onDoubleClick() {
                 super.onDoubleClick()
                 try {
-//                    // Update the dimensions of the PisteView here
-//                    Log.d("Doubleclicktest", "Double click detected")
-//                    if(pisteView.getIsVertical()){
-//                        Log.d("Doubleclicktest", "Piste was horizontal")
-//                        Log.d("Doubleclicktest", pisteView.getIsVertical().toString())
-//                        pisteView.setDimensions(3f, 17f)
-//                        pisteView.setIsVertical(true)
-//                    }else{
-//                        Log.d("Doubleclicktest", "Piste was vertical")
-//                        Log.d("Doubleclicktest", pisteView.getIsVertical().toString())
-//                        pisteView.setDimensions(3f, 17f)
-//                        pisteView.setIsVertical(false)
-//                    }
 
                     if(position){
                         Log.d("Doubleclicktest", "Piste was horizontal")
@@ -113,159 +100,85 @@ class LayoutActivity : AppCompatActivity() {
         })
 
 
-//         Set onTouchListener to move the view OnTouch()
-//        val pisteTouchListener = NewCustomTouchListener(this)
-//        pisteView.setOnTouchListener(pisteTouchListener)
-//
-//        pisteView.setOnTouchListener(object : NewCustomTouchListener(this@LayoutActivity) {
-//            override fun onLongPress(e: MotionEvent) {
-//                super.onLongPress(e)
-//                try{
-//                    val intent = Intent(this@LayoutActivity, PopUpWindow::class.java)
-//                    intent.putExtra("popuptitle", "Delete piste?")
-//                    intent.putExtra("popuptext", "Would you like to delete this piste?")
-//                    intent.putExtra("popupbtn", "Yes")
-//                    intent.putExtra("darkstatusbar", false)
-//                    startActivity(intent)
-//                }
-//                catch (ex: Exception) {
-//                    ex.printStackTrace()
-//                }
-//            }
-//        })
-//        val pisteTouchListener = CustomTouchListener()
-//        pisteView.setOnTouchListener(NewCustomTouchListener)
 
-//        // Set onTouchListener to change the position of the view OnDoubleClick
-//        pisteView.setOnTouchListener(object : CustomTouchListener(this@LayoutActivity) {
-//
-//            override fun onDoubleClick() {
-//                super.onDoubleClick()
-//                try {
-//                    // Update the dimensions of the PisteView here
-//                    Log.d("CUSTOMTOUCHLISTENER", "Double click detected")
-//                    if(position){
-//                        pisteView.setDimensions(3f, 17f)
-//                        position = false
-//                    }else{
-//                        pisteView.setDimensions(17f, 3f)
-//                        position = true
-//                    }
-//                }
-//                catch (ex: Exception) {
-//                    ex.printStackTrace()
-//                }
-//            }
-//
-//            override fun onLongClick(e: MotionEvent) {
-//                super.onLongClick(e)
-//                try{
-//                    val intent = Intent(this@LayoutActivity, PopUpWindow::class.java)
-//                    intent.putExtra("popuptitle", "Delete piste?")
-//                    intent.putExtra("popuptext", "Would you like to delete this piste?")
-//                    intent.putExtra("popupbtn", "Yes")
-//                    intent.putExtra("darkstatusbar", false)
-//                    startActivity(intent)
-//                }
-//                catch (ex: Exception){
-//                    ex.printStackTrace()
-//                }
-//            }
-//
-//            override fun onMove(e: MotionEvent): Boolean {
-////                super.onMove(e)
-////                try{
-////                    val x = e.rawX
-////                    val y = e.rawY
-////
-////                    when (e.actionMasked) {
-////                        MotionEvent.ACTION_DOWN -> {
-////                            dX = pisteView.x - x
-////                            dY = pisteView.y - y
-////                            Log.d("StartX", dX.toString())
-////                            Log.d("StartY", dY.toString())
-////                            Log.d("Move", "Move on Piste  is detected")
-////                        }
-////
-////                        MotionEvent.ACTION_MOVE -> {
-////                            pisteView.animate()
-////                                .x(x + dX)
-////                                .y(y + dY)
-////                                .setDuration(0)
-////                                .start()
-////                            Log.d("EndX", dX.toString())
-////                            Log.d("EndY", dY.toString())
-////                        }
-////
-////                        else -> return false
-////                    }
-////
-////                }
-////                catch (ex: Exception){
-////                    ex.printStackTrace()
-////
-////                }
-//                return true
-//            }
-//        })
+        val parentView = findViewById<RelativeLayout>(R.id.parentView)
+        btnAdd = findViewById(R.id.fabAdd)
+        btnAdd.setOnClickListener {
+            Log.d("AddView", "Attempt to add a view detected")
+            val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            val newPisteView: PisteView = inflater.inflate(R.layout.piste, null) as PisteView
+            //var layoutParams = RelativeLayout.LayoutParams(307, 313)
+            val layoutParams = RelativeLayout.LayoutParams( RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
+            Log.d("LAYOUT", (17f*oneMeter).toInt().toString())
+            Log.d("LAYOUT", (3f*oneMeter).toInt().toString())
+            layoutParams.addRule(RelativeLayout.BELOW, R.id.rectangle_view)
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_START)
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END)
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM)
+            layoutParams.marginStart = 61
+            layoutParams.topMargin = 33
+            layoutParams.marginEnd = 46
+            layoutParams.bottomMargin = 47
+            newPisteView.layoutParams = layoutParams
 
-//        val parentView = findViewById<RelativeLayout>(R.id.parentView)
-//        btnAdd = findViewById(R.id.fabAdd)
-//        btnAdd.setOnClickListener {
-//            Log.d("AddView", "Attempt to add a view detected")
-//            val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-//            val newPisteView: PisteView = inflater.inflate(R.layout.piste, null) as PisteView
-//            //var layoutParams = RelativeLayout.LayoutParams(307, 313)
-//            val layoutParams = RelativeLayout.LayoutParams( RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
-//            Log.d("LAYOUT", (17f*oneMeter).toInt().toString())
-//            Log.d("LAYOUT", (3f*oneMeter).toInt().toString())
-//            layoutParams.addRule(RelativeLayout.BELOW, R.id.rectangle_view)
-//            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_START)
-//            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_END)
-//            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM)
-//            layoutParams.marginStart = 61
-//            layoutParams.topMargin = 33
-//            layoutParams.marginEnd = 46
-//            layoutParams.bottomMargin = 47
-//            newPisteView.layoutParams = layoutParams
-//
-//            newPisteView.setLayoutParams(
-//                RelativeLayout.LayoutParams(
-//                    RelativeLayout.LayoutParams.MATCH_PARENT,
-//                    RelativeLayout.LayoutParams.MATCH_PARENT
-//                )
-//            )
-//            parentView.addView(newPisteView, parentView.childCount - 1)
-//            newPisteView.setOneMeter(oneMeter)
-//            newPisteView.setDimensions(17f, 3f)
-//            newPisteView.layoutParams = layoutParams
-//
-//            if(numStrips>0){
-//                numStrips-=1
-//                val pistesLeft = numStrips.toString()+ " left"
-//                Toast.makeText(this, pistesLeft, Toast.LENGTH_SHORT).show()
-//            }
-//            else{
-//                Toast.makeText(this, "No more pistes left, use the ones that you already have!", Toast.LENGTH_SHORT).show()
-//            }
-//
-////            newPisteView.setOnTouchListener(pisteTouchListener)
-////            Log.d("pisteWidth", newPisteView.getPisteWidth().toString())
-//        }
+            newPisteView.setLayoutParams(
+                RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.MATCH_PARENT,
+                    RelativeLayout.LayoutParams.MATCH_PARENT
+                )
+            )
+            parentView.addView(newPisteView, parentView.childCount - 1)
+            newPisteView.setOneMeter(oneMeter)
+            newPisteView.setDimensions(17f, 3f)
+            newPisteView.layoutParams = layoutParams
 
-//        btnNext = findViewById(R.id.fabNext)
-//        btnNext.setOnClickListener{
-////            val new_intent = Intent(this, ResultActivity::class.java)
-////            startActivity(new_intent)
-//            saveLayout()
-//            val intent = Intent(this, PopUpWindow::class.java)
-//            intent.putExtra("popuptitle", "All done!")
-//            intent.putExtra("popuptext", "Click OK to go to the home page")
-//            intent.putExtra("popupbtn", "OK")
-//            intent.putExtra("darkstatusbar", false)
-//            startActivity(intent)
-//
-//        }
+            if(numStrips>0){
+                numStrips-=1
+                val pistesLeft = numStrips.toString()+ " left"
+                Toast.makeText(this, pistesLeft, Toast.LENGTH_SHORT).show()
+            }
+            else{
+                Toast.makeText(this, "No more pistes left, use the ones that you already have!", Toast.LENGTH_SHORT).show()
+            }
+
+//            newPisteView.setOnTouchListener(pisteTouchListener)
+//            Log.d("pisteWidth", newPisteView.getPisteWidth().toString())
+            newPisteView.setOnTouchListener(object: MyCustomTouchListener(newPisteView){
+                override fun onDoubleClick() {
+                    super.onDoubleClick()
+                    try {
+
+                        if(position){
+                            Log.d("Doubleclicktest", "Piste was horizontal")
+                            newPisteView.setDimensions(3f, 17f)
+                            position = false
+                        }else{
+                            Log.d("Doubleclicktest", "Piste was vertical")
+                            newPisteView.setDimensions(17f, 3f)
+                            position = true
+                        }
+                    }
+                    catch (ex: Exception) {
+                        ex.printStackTrace()
+                    }
+
+                }
+            })
+        }
+
+        btnNext = findViewById(R.id.fabNext)
+        btnNext.setOnClickListener{
+//            val new_intent = Intent(this, ResultActivity::class.java)
+//            startActivity(new_intent)
+            saveLayout()
+            val intent = Intent(this, PopUpWindow::class.java)
+            intent.putExtra("popuptitle", "All done!")
+            intent.putExtra("popuptext", "Click OK to go to the home page")
+            intent.putExtra("popupbtn", "OK")
+            intent.putExtra("darkstatusbar", false)
+            startActivity(intent)
+
+        }
 
         }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
