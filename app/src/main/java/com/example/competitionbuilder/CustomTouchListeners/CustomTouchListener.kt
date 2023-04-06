@@ -18,7 +18,11 @@ open class CustomTouchListener(var context: Context) : View.OnTouchListener {
         private val SWIPE_DIST_THRESHOLD = 10
         private val SWIPE_VEL_THRESHOLD = 50
 
+        override fun onSingleTapUp(e: MotionEvent): Boolean {
+            onMove(e)
+            return super.onSingleTapUp(e)
 
+        }
 
         override fun onDown(e: MotionEvent): Boolean {
             return true
@@ -69,7 +73,7 @@ open class CustomTouchListener(var context: Context) : View.OnTouchListener {
             }
         }
 
-    private fun onLongClick(e: MotionEvent) {
+    open fun onLongClick(e: MotionEvent) {
         Log.d(
             "GESTURE_DETECTOR",
             "Detected long click in the custom touch listener"
@@ -99,11 +103,12 @@ open class CustomTouchListener(var context: Context) : View.OnTouchListener {
         )
     }
 
-    open fun onMove(motionEvent: MotionEvent){
+    open fun onMove(motionEvent: MotionEvent): Boolean{
         Log.d(
             "GESTURE_DETECTOR",
             "Detected move in the custom touch listener"
         )
+        return true
     }
 
     open fun onSwipe(){
@@ -115,7 +120,6 @@ open class CustomTouchListener(var context: Context) : View.OnTouchListener {
 
     override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
         //return false; //must return gesture detector's onTouchEvent
-
 
         return gestureDetectorCompat.onTouchEvent(motionEvent)
     }

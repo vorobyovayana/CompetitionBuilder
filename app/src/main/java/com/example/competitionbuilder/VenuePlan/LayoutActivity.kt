@@ -1,5 +1,6 @@
 package com.example.competitionbuilder.VenuePlan
 
+import MyCustomTouchListener
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -9,18 +10,17 @@ import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
-import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import android.widget.Button
+import android.view.MotionEvent
+import android.view.View
 import android.widget.RelativeLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import com.example.competitionbuilder.CustomTouchListeners.CustomTouchListener
+import com.example.competitionbuilder.CustomTouchListeners.NewCustomTouchListener
 
-import com.example.competitionbuilder.CustomTouchListeners.PisteTouchListener
 import com.example.competitionbuilder.CustomViews.PisteView
 import com.example.competitionbuilder.CustomViews.RectangleView
-import com.example.competitionbuilder.MainActivity
 import com.example.competitionbuilder.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.io.File
@@ -73,14 +73,38 @@ class LayoutActivity : AppCompatActivity() {
         pisteView.setOneMeter(oneMeter)
         pisteView.setDimensions(17f, 3f)
 
+
         // position = true -- means the piste is positioned horizontally,
         // false -- vertically
         position = true
 
 
+        val myCustomTouchListener = MyCustomTouchListener(pisteView)
+        pisteView.setOnTouchListener(myCustomTouchListener)
+
+
 //         Set onTouchListener to move the view OnTouch()
-        val pisteTouchListener = PisteTouchListener()
-        pisteView.setOnTouchListener(pisteTouchListener)
+//        val pisteTouchListener = NewCustomTouchListener(this)
+//        pisteView.setOnTouchListener(pisteTouchListener)
+//
+//        pisteView.setOnTouchListener(object : NewCustomTouchListener(this@LayoutActivity) {
+//            override fun onLongPress(e: MotionEvent) {
+//                super.onLongPress(e)
+//                try{
+//                    val intent = Intent(this@LayoutActivity, PopUpWindow::class.java)
+//                    intent.putExtra("popuptitle", "Delete piste?")
+//                    intent.putExtra("popuptext", "Would you like to delete this piste?")
+//                    intent.putExtra("popupbtn", "Yes")
+//                    intent.putExtra("darkstatusbar", false)
+//                    startActivity(intent)
+//                }
+//                catch (ex: Exception) {
+//                    ex.printStackTrace()
+//                }
+//            }
+//        })
+//        val pisteTouchListener = CustomTouchListener()
+//        pisteView.setOnTouchListener(NewCustomTouchListener)
 
 //        // Set onTouchListener to change the position of the view OnDoubleClick
 //        pisteView.setOnTouchListener(object : CustomTouchListener(this@LayoutActivity) {
@@ -101,6 +125,57 @@ class LayoutActivity : AppCompatActivity() {
 //                catch (ex: Exception) {
 //                    ex.printStackTrace()
 //                }
+//            }
+//
+//            override fun onLongClick(e: MotionEvent) {
+//                super.onLongClick(e)
+//                try{
+//                    val intent = Intent(this@LayoutActivity, PopUpWindow::class.java)
+//                    intent.putExtra("popuptitle", "Delete piste?")
+//                    intent.putExtra("popuptext", "Would you like to delete this piste?")
+//                    intent.putExtra("popupbtn", "Yes")
+//                    intent.putExtra("darkstatusbar", false)
+//                    startActivity(intent)
+//                }
+//                catch (ex: Exception){
+//                    ex.printStackTrace()
+//                }
+//            }
+//
+//            override fun onMove(e: MotionEvent): Boolean {
+////                super.onMove(e)
+////                try{
+////                    val x = e.rawX
+////                    val y = e.rawY
+////
+////                    when (e.actionMasked) {
+////                        MotionEvent.ACTION_DOWN -> {
+////                            dX = pisteView.x - x
+////                            dY = pisteView.y - y
+////                            Log.d("StartX", dX.toString())
+////                            Log.d("StartY", dY.toString())
+////                            Log.d("Move", "Move on Piste  is detected")
+////                        }
+////
+////                        MotionEvent.ACTION_MOVE -> {
+////                            pisteView.animate()
+////                                .x(x + dX)
+////                                .y(y + dY)
+////                                .setDuration(0)
+////                                .start()
+////                            Log.d("EndX", dX.toString())
+////                            Log.d("EndY", dY.toString())
+////                        }
+////
+////                        else -> return false
+////                    }
+////
+////                }
+////                catch (ex: Exception){
+////                    ex.printStackTrace()
+////
+////                }
+//                return true
 //            }
 //        })
 
@@ -144,8 +219,8 @@ class LayoutActivity : AppCompatActivity() {
                 Toast.makeText(this, "No more pistes left, use the ones that you already have!", Toast.LENGTH_SHORT).show()
             }
 
-            newPisteView.setOnTouchListener(pisteTouchListener)
-            Log.d("pisteWidth", newPisteView.getPisteWidth().toString())
+//            newPisteView.setOnTouchListener(pisteTouchListener)
+//            Log.d("pisteWidth", newPisteView.getPisteWidth().toString())
         }
 
         btnNext = findViewById(R.id.fabNext)
@@ -153,6 +228,13 @@ class LayoutActivity : AppCompatActivity() {
 //            val new_intent = Intent(this, ResultActivity::class.java)
 //            startActivity(new_intent)
             saveLayout()
+            val intent = Intent(this, PopUpWindow::class.java)
+            intent.putExtra("popuptitle", "All done!")
+            intent.putExtra("popuptext", "Click OK to go to the home page")
+            intent.putExtra("popupbtn", "OK")
+            intent.putExtra("darkstatusbar", false)
+            startActivity(intent)
+
         }
 
         }
@@ -185,10 +267,6 @@ class LayoutActivity : AppCompatActivity() {
 
     }
 
-//        btnBack.setOnClickListener {
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-//        }
 
 
 }

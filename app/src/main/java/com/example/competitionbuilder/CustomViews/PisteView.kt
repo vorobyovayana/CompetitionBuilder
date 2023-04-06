@@ -20,9 +20,19 @@ class PisteView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
     private var oneMeter: Float = 0F
     private var pisteWidth: Int  = 0
     private var pisteHeight: Int  = 0
+    private var isVertical: Boolean = false
+
     fun setOneMeter(oneM: Float){
         this.oneMeter = oneM
         invalidate()
+    }
+
+    fun setIsVertical(p: Boolean){
+        this.isVertical = p
+    }
+
+    fun getIsVertical(): Boolean{
+        return this.isVertical
     }
 
     fun getPisteWidth(): Int{
@@ -86,6 +96,7 @@ class PisteView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
     fun setDimensions(width: Float, height: Float) {
         this.width = width
         this.height = height
+        Log.d("REDRAW", "trying to redraw")
         invalidate()
     }
 
