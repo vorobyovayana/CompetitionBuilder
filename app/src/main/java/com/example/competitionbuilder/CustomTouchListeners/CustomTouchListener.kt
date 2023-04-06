@@ -68,10 +68,10 @@ open class CustomTouchListener(var context: Context) : View.OnTouchListener {
 //                    onSwipeDown()
 //                } else {
 //                    onSwipeUp()
-                }
-            return super.onFling(e1, e2, velocityX, velocityY)
             }
+            return super.onFling(e1, e2, velocityX, velocityY)
         }
+    }
 
     open fun onLongClick(e: MotionEvent) {
         Log.d(

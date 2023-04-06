@@ -11,7 +11,7 @@ import android.util.Log
 import android.view.DragEvent
 import android.view.MotionEvent
 import android.view.View
-import com.example.competitionbuilder.CustomTouchListeners.CustomTouchListener
+
 
 class PisteView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
 

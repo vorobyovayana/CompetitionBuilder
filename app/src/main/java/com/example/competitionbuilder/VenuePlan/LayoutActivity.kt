@@ -17,7 +17,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.competitionbuilder.CustomTouchListeners.CustomTouchListener
-import com.example.competitionbuilder.CustomTouchListeners.NewCustomTouchListener
+
 
 import com.example.competitionbuilder.CustomViews.PisteView
 import com.example.competitionbuilder.CustomViews.RectangleView
@@ -141,8 +141,6 @@ class LayoutActivity : AppCompatActivity() {
                 Toast.makeText(this, "No more pistes left, use the ones that you already have!", Toast.LENGTH_SHORT).show()
             }
 
-//            newPisteView.setOnTouchListener(pisteTouchListener)
-//            Log.d("pisteWidth", newPisteView.getPisteWidth().toString())
             newPisteView.setOnTouchListener(object: MyCustomTouchListener(newPisteView){
                 override fun onDoubleClick() {
                     super.onDoubleClick()
@@ -165,11 +163,8 @@ class LayoutActivity : AppCompatActivity() {
                 }
             })
         }
-
         btnNext = findViewById(R.id.fabNext)
         btnNext.setOnClickListener{
-//            val new_intent = Intent(this, ResultActivity::class.java)
-//            startActivity(new_intent)
             saveLayout()
             val intent = Intent(this, PopUpWindow::class.java)
             intent.putExtra("popuptitle", "All done!")
@@ -180,7 +175,7 @@ class LayoutActivity : AppCompatActivity() {
 
         }
 
-        }
+    }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
