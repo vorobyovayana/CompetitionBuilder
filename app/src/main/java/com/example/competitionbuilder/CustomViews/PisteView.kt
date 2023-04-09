@@ -15,39 +15,42 @@ import android.view.View
 
 class PisteView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
 
+    // Piste dimensions (always 17f, 3f or 17f, 3f)
+    // We need to have it as a variable though, because the user
+    // can change the orientation of the piste
     private var width: Float = 0F
     private var height: Float = 0F
+
+    // One meter equivalent in pixels
     private var oneMeter: Float = 0F
+    // Piste dimensions in pixels
     private var pisteWidth: Int  = 0
     private var pisteHeight: Int  = 0
-    private var isVertical: Boolean = false
 
     fun setOneMeter(oneM: Float){
         this.oneMeter = oneM
         invalidate()
     }
 
-    fun setIsVertical(p: Boolean){
-        this.isVertical = p
-    }
-
-    fun getIsVertical(): Boolean{
-        return this.isVertical
-    }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
+        // Configure the color and style of the piste
         val paint = Paint().apply {
             color = Color.parseColor("#7900FF")
             style = Paint.Style.STROKE
             strokeWidth = 8f
         }
 
+        // Configure the color and style of the area around the piste
+        // (We draw with a dash line area that can't be occupied by anything,
+        // to reserve enough space for the piste)
         val dashPaint = Paint().apply {
             color = Color.parseColor("#36454F")
             style = Paint.Style.STROKE
             strokeWidth = 4f
+            // Make the dash line
             pathEffect = android.graphics.DashPathEffect(floatArrayOf(20f, 20f), 0f)
         }
 
@@ -55,18 +58,8 @@ class PisteView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
         // Divide the width in pixels to the width entered by user - to get 1 meter
         // Multiply 17f and number in pixels for one meter to get the actual width in pixels
         // Do the same for height
-        // Create the if logic like above to include the different venue shapes
-        val viewAspectRatio = canvas.width.toFloat() / canvas.height.toFloat()
-        val pisteAspectRatio = width / height
-
-
-        if (viewAspectRatio > pisteAspectRatio) {
-            pisteWidth = (this.width * this.oneMeter).toInt()
-            pisteHeight = (this.height * this.oneMeter).toInt()
-        } else {
-            pisteWidth = (this.width * this.oneMeter).toInt()
-            pisteHeight = (this.height * this.oneMeter).toInt()
-        }
+        pisteWidth = (this.width * this.oneMeter).toInt()
+        pisteHeight = (this.height * this.oneMeter).toInt()
 
         // Calculate the position of the rectangle in the view
         val rectLeft = (canvas.width - pisteWidth) / 2f
@@ -86,6 +79,7 @@ class PisteView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
         Log.d("Doubleclicktest", pisteWidth.toString())
     }
 
+    // Trigger the onDraw() and redraw the piste
     fun setDimensions(width: Float, height: Float) {
         this.width = width
         this.height = height

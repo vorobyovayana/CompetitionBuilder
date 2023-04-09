@@ -3,18 +3,17 @@ package com.example.competitionbuilder
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Gravity
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.example.competitionbuilder.AR.ARActivity
 import com.example.competitionbuilder.Auth.SignInActivity
-import com.example.competitionbuilder.CustomTouchListeners.CustomTouchListener
+import com.example.competitionbuilder.CustomTouchListeners.UtilCustomTouchListener
 import com.example.competitionbuilder.VenuePlan.VenueActivity
 import com.example.competitionbuilder.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 
-
+// Activity to show the tips about the app and navigate to features
 class MainActivity : AppCompatActivity() {
 
     var slideIndex: Int = 0
@@ -24,10 +23,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
-//        val actionBar: ActionBar? = supportActionBar
-//        if (actionBar != null) {
-//            actionBar.setDisplayHomeAsUpEnabled(true)
-//        }
 
         var Intent1: Intent
         Intent1 = getIntent()
@@ -38,7 +33,6 @@ class MainActivity : AppCompatActivity() {
         else{
             binding.txtViewHello.isVisible = false
         }
-
 
         binding.imgBtnLogout.setOnClickListener {
             FirebaseAuth.getInstance().signOut();
@@ -56,11 +50,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.cardViewInfo.setOnTouchListener(object : CustomTouchListener(this@MainActivity) {
+        binding.cardViewInfo.setOnTouchListener(object : UtilCustomTouchListener(this@MainActivity) {
             val txtSlideNum = findViewById<TextView>(R.id.txtViewSlideNum)
             val txtInfo = findViewById<TextView>(R.id.txtViewInfo)
 
+            // Change text when swiping left
             override fun onSwipeLeft() {
+                // (override the method from UtilCustomTouchListener)
                 super.onSwipeLeft()
                 if(slideIndex<3){
                     slideIndex+=1
@@ -88,7 +84,8 @@ class MainActivity : AppCompatActivity() {
 
 
             }
-
+            // Change texts when swiping right
+            // (override the method from UtilCustomTouchListener)
             override fun onSwipeRight() {
                 super.onSwipeRight()
 
@@ -119,7 +116,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             })
-
 
 
     }

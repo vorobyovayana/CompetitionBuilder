@@ -44,38 +44,43 @@ class SaveLayoutPopUp : AppCompatActivity() {
         overridePendingTransition(0, 0)
         setContentView(R.layout.activity_pop_up_window)
 
+        // Get the texts for the popup from the previous activity
         val bundle = intent.extras
         popupTitle = bundle?.getString("popuptitle", "Title") ?: ""
         popupText = bundle?.getString("popuptext", "Text") ?: ""
         popupButton = bundle?.getString("popupbtn", "Button") ?: ""
         darkStatusBar = bundle?.getBoolean("darkstatusbar", false) ?: false
 
+        // Get rectangle dimensions, because after the pop up is closed, we need to
+        // redraw the rectangle and the piste
         var Intent1: Intent
         Intent1 = getIntent()
-
         width = Intent1.getFloatExtra("width", 0F)
         height = Intent1.getFloatExtra("height", 0F)
         rectViewWidth = Intent1.getIntExtra("rectViewWidth", 0)
         rectViewHeight = Intent1.getIntExtra("rectViewHeight", 0)
         numStrips = Intent1.getIntExtra("numStrips", 0)
 
+        // Find the views, and set texts
         popup_window_title = findViewById(R.id.popup_window_title)
         popup_window_text = findViewById(R.id.popup_window_text)
         popup_window_button = findViewById(R.id.popup_window_button)
-
         popup_window_title.text = popupTitle
         popup_window_text.text = popupText
         popup_window_button.text = popupButton
 
+        // Get the background view, so that we can assign onTouch listener to it.
         popup_window_background = findViewById(R.id.popup_window_background)
+
+        // Get current user's email from firebase
         firebaseAuth = FirebaseAuth.getInstance()
         email = firebaseAuth.currentUser!!.email.toString()
 
+        // Setting up colors for  pop up animation
         val alpha = 100 //between 0-255
         val alphaColor = ColorUtils.setAlphaComponent(Color.parseColor("#000000"), alpha)
         val colorAnimation = ValueAnimator.ofObject(ArgbEvaluator(), Color.TRANSPARENT, alphaColor)
         colorAnimation.duration = 500 // milliseconds
-//        val popup_window_background = findViewById<ConstraintLayout>(R.id.popup_window_background)
         colorAnimation.addUpdateListener { animator ->
             popup_window_background.setBackgroundColor(animator.animatedValue as Int)
         }
@@ -89,13 +94,13 @@ class SaveLayoutPopUp : AppCompatActivity() {
             DecelerateInterpolator()
         ).start()
 
+
         popup_window_button.setOnClickListener {
             onBackPressed()
         }
 
         popup_window_background.setOnClickListener{
             val intent = Intent(this, LayoutActivity::class.java)
-
             intent.putExtra("width", width)
             intent.putExtra("height", height)
             intent.putExtra("rectViewWidth", rectViewWidth)

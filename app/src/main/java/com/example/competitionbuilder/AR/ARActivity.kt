@@ -29,9 +29,10 @@ import java.util.function.Function
 class ARActivity : AppCompatActivity() {
     private lateinit var arFragment: ArFragment
 
-    //private lateinit var binding: ActivityAractivityBinding
+
     //object of ArFragment Class
     private var arCam  : ArFragment? = null
+
     //lateinit for Augmented Reality Fragment
     private var clickNo = 0 //helps to render the 3d model only once when we tap the screen
 
@@ -64,37 +65,18 @@ class ARActivity : AppCompatActivity() {
     }
 
     private fun addModel(anchor: Anchor, modelRenderable: ModelRenderable) {
-        val anchorNode = AnchorNode(anchor)
         // Creating a AnchorNode with a specific anchor
-        anchorNode.setParent(arCam!!.arSceneView.scene)
+        val anchorNode = AnchorNode(anchor)
         //attaching the anchorNode with the ArFragment
+        anchorNode.setParent(arCam!!.arSceneView.scene)
+        //attaching the anchorNode with the TransformableNode
+        // TransformableNode - allows you to the spin the model
         val model = TransformableNode(arCam!!.transformationSystem)
         model.setParent(anchorNode)
-        //attaching the anchorNode with the TransformableNode
-        model.renderable = modelRenderable
         //attaching the 3d model with the TransformableNode that is already attached with the node
+        model.renderable = modelRenderable
         model.select()
     }
-
-
-
-
-//    private fun addModel(anchor: Anchor, modelRenderable: ModelRenderable, distance: Float) {
-//        val anchorNode = AnchorNode(anchor)
-//        // Creating a AnchorNode with a specific anchor
-//        anchorNode.setParent(arCam!!.arSceneView.scene)
-//        //attaching the anchorNode with the ArFragment
-//
-//        // Move the anchorNode away from the camera by adjusting the translation along the z-axis
-//        anchorNode.localPosition = Vector3(0f, -1f, -distance)
-//
-//        val model = TransformableNode(arCam!!.transformationSystem)
-//        model.setParent(anchorNode)
-//        //attaching the anchorNode with the TransformableNode
-//        model.renderable = modelRenderable
-//        //attaching the 3d model with the TransformableNode that is already attached with the node
-//        model.select()
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,6 +94,7 @@ class ARActivity : AppCompatActivity() {
                 //the 3d model comes to the scene only when clickNo is one that means once
                 if (clickNo == 1) {
                     val anchor = hitResult.createAnchor()
+                    // Render the model, pass the anchor, and the modelRenderable if it's not null
                     ModelRenderable.builder()
                         .setSource(this, R.raw.piste_basic_katushki_sm3_lower)
                         .setIsFilamentGltf(true)
@@ -136,6 +119,7 @@ class ARActivity : AppCompatActivity() {
             return
         }
     }
+    // Enable back arrow on the action bar.
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {

@@ -1,20 +1,17 @@
 package com.example.competitionbuilder.VenuePlan
 
 
-import MyCustomTouchListener
+import PisteCustomTouchListener
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
-import android.text.format.DateFormat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
-import android.view.View
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -24,10 +21,6 @@ import com.example.competitionbuilder.CustomViews.PisteView
 import com.example.competitionbuilder.CustomViews.RectangleView
 import com.example.competitionbuilder.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.util.*
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.pdf.PdfWriter;
 import java.io.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -39,7 +32,6 @@ class LayoutActivity : AppCompatActivity() {
     var rectViewHeight = 0
     var oneMeter = 0F
     var numStrips = 0
-
 
     private lateinit var pisteView: PisteView
     private lateinit var btnAdd: FloatingActionButton
@@ -60,6 +52,7 @@ class LayoutActivity : AppCompatActivity() {
         }
 
         var Intent1: Intent
+        // Get rectangleView dimensions from Intent to redraw it here
         Intent1 = getIntent()
         width = Intent1.getFloatExtra("width", 0F)
         height = Intent1.getFloatExtra("height", 0F)
@@ -67,33 +60,35 @@ class LayoutActivity : AppCompatActivity() {
         rectViewHeight = Intent1.getIntExtra("rectViewHeight", 0)
         numStrips = Intent1.getIntExtra("numStrips", 0)
 
-
         val rectangle = findViewById<RectangleView>(R.id.rectangle_view)
         pisteView = findViewById(R.id.piste_view)
+
+        // Draw the rectangle
         rectangle.setDimensions(width, height)
 
+        // Calculate what is a pixel equivalent of one meter
         if(width>height){
             oneMeter = rectViewWidth/width
         }
         else{
             oneMeter = rectViewHeight/height
         }
-
+        // Draw the piste using the dimensions and one meter
         pisteView.setOneMeter(oneMeter)
         pisteView.setDimensions(17f, 3f)
+        // Decrease the num of available pistes since one piste is already drawn
         numStrips -=1
 
         // position = true -- means the piste is positioned horizontally,
         // false -- vertically
         position = true
 
-//        val myCustomTouchListener = MyCustomTouchListener(pisteView)
-//        pisteView.setOnTouchListener(myCustomTouchListener)
-        pisteView.setOnTouchListener(object: MyCustomTouchListener(pisteView){
+        // Set on touch listener (double click = change orientation,
+        // move (onTouch()) = change pistes location. onTouch is implemented in the PisteCustomTouchListener)
+        pisteView.setOnTouchListener(object: PisteCustomTouchListener(pisteView){
             override fun onDoubleClick() {
                 super.onDoubleClick()
                 try {
-
                     if(position){
                         Log.d("Doubleclicktest", "Piste was horizontal")
                         pisteView.setDimensions(3f, 17f)
@@ -107,12 +102,11 @@ class LayoutActivity : AppCompatActivity() {
                 catch (ex: Exception) {
                     ex.printStackTrace()
                 }
-
             }
 
-            override fun onLongClick() {
-                super.onLongClick()
-                try {
+//            override fun onLongClick() {
+//                super.onLongClick()
+//                try {
 //                    val intent = Intent(pisteView.context, PopUpWindow::class.java)
 //
 //                    intent.putExtra("popuptitle", "Delete piste?")
@@ -126,24 +120,25 @@ class LayoutActivity : AppCompatActivity() {
 //                    intent.putExtra("numStrips", numStrips)
 //
 //                    pisteView.context.startActivity(intent)
-
-
-                }
-                catch (ex: Exception){
-                    ex.printStackTrace()
-                }
-            }
-
+//                }
+//                catch (ex: Exception){
+//                    ex.printStackTrace()
+//                }
+//            }
         })
 
-
-        parentView = findViewById<RelativeLayout>(R.id.parentView)
+        parentView = findViewById(R.id.parentView)
         btnAdd = findViewById(R.id.fabAdd)
+
+        // When add btn is clicked, add a new pisteView to the screen and assign the same
+        // onTouch listeners to the new piste.
         btnAdd.setOnClickListener {
             Log.d("AddView", "Attempt to add a view detected")
             val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             val newPisteView: PisteView = inflater.inflate(R.layout.piste, null) as PisteView
             //var layoutParams = RelativeLayout.LayoutParams(307, 313)
+
+            // Setting up the layout parameters of the new pisteView, so that it looks right on the screen
             val layoutParams = RelativeLayout.LayoutParams( RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
             Log.d("LAYOUT", (17f*oneMeter).toInt().toString())
             Log.d("LAYOUT", (3f*oneMeter).toInt().toString())
@@ -156,14 +151,13 @@ class LayoutActivity : AppCompatActivity() {
             layoutParams.marginEnd = 46
             layoutParams.bottomMargin = 47
             newPisteView.layoutParams = layoutParams
-
-            newPisteView.setLayoutParams(
-                RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.MATCH_PARENT,
-                    RelativeLayout.LayoutParams.MATCH_PARENT
-                )
-            )
-
+//            newPisteView.setLayoutParams(
+//                RelativeLayout.LayoutParams(
+//                    RelativeLayout.LayoutParams.MATCH_PARENT,
+//                    RelativeLayout.LayoutParams.MATCH_PARENT
+//                )
+//            )
+            // Decrease the num of available pistes and show a toast of how many more left
             if(numStrips>0){
                 numStrips-=1
                 parentView.addView(newPisteView, parentView.childCount - 1)
@@ -172,17 +166,16 @@ class LayoutActivity : AppCompatActivity() {
                 newPisteView.layoutParams = layoutParams
                 val pistesLeft = numStrips.toString()+ " left"
                 Toast.makeText(this, pistesLeft, Toast.LENGTH_SHORT).show()
-
             }
             else{
                 Toast.makeText(this, "No more pistes left, use the ones that you already have!", Toast.LENGTH_SHORT).show()
             }
 
-            newPisteView.setOnTouchListener(object: MyCustomTouchListener(newPisteView){
+            // Add on Touch Listeners, same as above
+            newPisteView.setOnTouchListener(object: PisteCustomTouchListener(newPisteView){
                 override fun onDoubleClick() {
                     super.onDoubleClick()
                     try {
-
                         if(position){
                             Log.d("Doubleclicktest", "Piste was horizontal")
                             newPisteView.setDimensions(3f, 17f)
@@ -196,7 +189,6 @@ class LayoutActivity : AppCompatActivity() {
                     catch (ex: Exception) {
                         ex.printStackTrace()
                     }
-
                 }
 
 //                override fun onLongClick() {
@@ -221,22 +213,21 @@ class LayoutActivity : AppCompatActivity() {
 //                }
             })
         }
+
         btnNext = findViewById(R.id.fabNext)
+        // Save layout to image when
         btnNext.setOnClickListener{
             saveLayout()
-
             //savedBitmapFromViewToFile()
-//            val intent = Intent(this, SaveLayoutPopUp::class.java)
-//            intent.putExtra("popuptitle", "All done!")
-//            intent.putExtra("popuptext", "Click OK to go to the home page")
-//            intent.putExtra("popupbtn", "OK")
-//            intent.putExtra("darkstatusbar", false)
-//            startActivity(intent)
-
+            val intent = Intent(this, SaveLayoutPopUp::class.java)
+            intent.putExtra("popuptitle", "All done!")
+            intent.putExtra("popuptext", "Click OK to go to the home page")
+            intent.putExtra("popupbtn", "OK")
+            intent.putExtra("darkstatusbar", false)
+            startActivity(intent)
         }
-
-
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
@@ -248,15 +239,23 @@ class LayoutActivity : AppCompatActivity() {
         }
     }
 
+    // Method to save the screen to a jpeg
     @RequiresApi(Build.VERSION_CODES.O)
     fun saveLayout(){
+        //  Get the view
         val rootView = window.decorView.rootView
+        // Enable Drawing Cache
         rootView.isDrawingCacheEnabled = true
+        // Create the bitmap from the drawing cahce
         val bitmap = Bitmap.createBitmap(rootView.drawingCache)
+        // Get the directory
         val directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+        // Format the date and time
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
         val current = LocalDateTime.now().format(formatter)
+        // Disable the drawing cache for rootView
         rootView.isDrawingCacheEnabled = false
+        // Create the file
         val file = File(directory, "layout_"+current+".jpg")
         val outputStream = FileOutputStream(file)
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
@@ -265,7 +264,5 @@ class LayoutActivity : AppCompatActivity() {
         Toast.makeText(this, "Layout image saved successfully", Toast.LENGTH_SHORT).show()
         outputStream.close()
         bitmap.recycle()
-
     }
-
 }

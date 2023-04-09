@@ -6,6 +6,7 @@ import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.example.competitionbuilder.Auth.SignInActivity
 
+// Splash Activity to show a pretty picture before the app starts
 class SplashActivity : AppCompatActivity() {
     private val SPLASH_DISPLAY_LENGTH = 5000
     override fun onCreate(savedInstanceState: Bundle?) {

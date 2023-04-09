@@ -19,14 +19,18 @@ import java.lang.Math.floor
 import kotlin.math.floor
 
 class VenueActivity : AppCompatActivity() {
+
+    // UI components
     private lateinit var editTextWidth: EditText
     private lateinit var editTextHeight: EditText
     private lateinit var  txtViewNumStrips: TextView
     private lateinit var btnGoToStrips: Button
     private lateinit var rectangle: RectangleView
 
+    // Dimensions of the future rectangle
     var width = 0F;
     var height = 0F;
+    // Number of pistes that can fit in the venue (will be calculated later)
     var numStrips = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +43,7 @@ class VenueActivity : AppCompatActivity() {
             actionBar.setDisplayHomeAsUpEnabled(true)
         }
 
+
         editTextWidth = findViewById(R.id.editTextLength)
         editTextHeight = findViewById(R.id.editTextWidth)
         txtViewNumStrips = findViewById(R.id.txtViewNumStrips)
@@ -46,8 +51,10 @@ class VenueActivity : AppCompatActivity() {
 
         val buttonCreateRectangle = findViewById<Button>(R.id.buttonCreateRectangle)
 
+        // When btn is clicked, create a RectanlgeView object with dimensions entered by user
         buttonCreateRectangle.setOnClickListener {
             try{
+
             width = editTextWidth.text.toString().toFloat()
             height = editTextHeight.text.toString().toFloat()
 
@@ -57,12 +64,15 @@ class VenueActivity : AppCompatActivity() {
                 rectangle.isVisible = true
             numStrips = getNumStrips(width, height)
             txtViewNumStrips.setText("You can fit " + numStrips.toString() + " fencing strips in your venue")
-            }catch (ex:Exception){
+            }
+            catch (ex:Exception){
                 ex.printStackTrace()
                 Toast.makeText(this@VenueActivity, "Please enter both width and length, and make sure that they are numbers", Toast.LENGTH_SHORT ).show()
             }
-
         }
+
+        // When btn is clicked, the user is redirected to the next screen when they will create the layout
+        // Rectangle parameters are passed through bundle to redraw the view on the Layout activity.
         btnGoToStrips.setOnClickListener {
             try{
                 if(numStrips>0){
@@ -85,6 +95,7 @@ class VenueActivity : AppCompatActivity() {
         }
     }
 
+    // Required to make the arrow on the action bar functional
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
@@ -96,6 +107,7 @@ class VenueActivity : AppCompatActivity() {
         }
     }
 
+    // Calculate the number of strips that can fit in a venue
     fun getNumStrips(venueLength: Float, venueWidth: Float): Int {
         val pisteWidth = 5
         val pisteLength = 20
