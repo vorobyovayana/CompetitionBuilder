@@ -22,14 +22,15 @@
         android:theme="@style/Theme.CompetitionBuilder"
         tools:targetApi="31">
         <activity
+            android:name=".VenuePlan.SaveLayoutPopUp"
+            android:exported="false" />
+        <activity
             android:name=".VenuePlan.PopUpWindow"
             android:exported="false" />
         <activity
             android:name=".VenuePlan.ResultActivity"
             android:exported="false" />
-        <activity
-            android:name=".InfoActivity"
-            android:exported="false" />
+
         <activity
             android:name=".SplashActivity"
             android:exported="true">

@@ -49,18 +49,17 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAdd"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
+            android:layout_height="56dp"
             android:layout_alignStart="@+id/piste_view"
             android:layout_alignTop="@+id/piste_view"
             android:layout_alignBottom="@+id/piste_view"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="254dp"
-            android:layout_marginTop="13dp"
-            android:layout_marginEnd="48dp"
-            android:layout_marginBottom="289dp"
+            android:layout_marginStart="266dp"
+            android:layout_marginTop="247dp"
+            android:layout_marginEnd="31dp"
+            android:layout_marginBottom="47dp"
             android:clickable="true"
-            android:color="@color/charcoal"
-            app:rippleColor="@color/charcoal"
+            app:backgroundTint="@color/offcharcoal"
             app:srcCompat="@drawable/ic_baseline_add_24" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -71,12 +70,13 @@
             android:layout_alignBottom="@+id/piste_view"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="307dp"
-            android:layout_marginTop="197dp"
-            android:layout_marginEnd="46dp"
-            android:layout_marginBottom="99dp"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="250dp"
+            android:layout_marginEnd="301dp"
+            android:layout_marginBottom="47dp"
             android:clickable="true"
-            app:srcCompat="@drawable/ic_baseline_save_24" />
+            app:backgroundTint="@color/offcharcoal"
+            app:srcCompat="@drawable/ic_baseline_save_alt_24" />
 
 
     </RelativeLayout>

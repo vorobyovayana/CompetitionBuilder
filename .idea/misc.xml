@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../../../../layout/custom_preview.xml" value="0.2755208333333333" />
+        <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_save_24.xml" value="0.192" />
         <entry key="app/src/main/res/layout/activity_ar.xml" value="0.22552083333333334" />
         <entry key="app/src/main/res/layout/activity_aractivity.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_info.xml" value="0.18697916666666667" />
@@ -13,7 +15,7 @@
         <entry key="app/src/main/res/layout/activity_plan.xml" value="0.19166666666666668" />
         <entry key="app/src/main/res/layout/activity_pop_up_window.xml" value="0.24322916666666666" />
         <entry key="app/src/main/res/layout/activity_result.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_venue.xml" value="0.335" />

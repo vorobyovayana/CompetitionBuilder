@@ -17,18 +17,8 @@ open class MyCustomTouchListener(private val pisteView: PisteView): View.OnTouch
 
     private val gestureDetector = GestureDetector(pisteView.context, object : GestureDetector.SimpleOnGestureListener() {
         override fun onLongPress(e: MotionEvent) {
-            super.onLongPress(e)
-            try {
-                val intent = Intent(pisteView.context, PopUpWindow::class.java)
-                intent.putExtra("popuptitle", "Delete piste?")
-                intent.putExtra("popuptext", "Would you like to delete this piste?")
-                intent.putExtra("popupbtn", "Yes")
-                intent.putExtra("darkstatusbar", false)
-                pisteView.context.startActivity(intent)
-            }
-            catch (ex: Exception){
-                ex.printStackTrace()
-            }
+            onLongClick()
+            return super.onLongPress(e)
         }
 
         override fun onDoubleTap(e: MotionEvent): Boolean {
@@ -41,6 +31,13 @@ open class MyCustomTouchListener(private val pisteView: PisteView): View.OnTouch
         Log.d(
             "GESTUREDEMO",
             "Detected double click in the custom touch listener"
+        )
+    }
+
+    open fun onLongClick(){
+        Log.d(
+            "GESTUREDEMO",
+            "Detected long click in the custom touch listener"
         )
     }
 

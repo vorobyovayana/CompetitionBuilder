@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Gravity
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.example.competitionbuilder.AR.ARActivity
 import com.example.competitionbuilder.Auth.SignInActivity
 import com.example.competitionbuilder.CustomTouchListeners.CustomTouchListener
@@ -31,10 +32,15 @@ class MainActivity : AppCompatActivity() {
         var Intent1: Intent
         Intent1 = getIntent()
         val email = Intent1.getStringExtra("email")
+        if(!email.equals(null)){
+            binding.txtViewHello.setText("Hello, "+email+" !")
+        }
+        else{
+            binding.txtViewHello.isVisible = false
+        }
 
-        binding.txtViewHello.setText("Hello, "+email+" !")
 
-        binding.btnLogOut.setOnClickListener {
+        binding.imgBtnLogout.setOnClickListener {
             FirebaseAuth.getInstance().signOut();
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)

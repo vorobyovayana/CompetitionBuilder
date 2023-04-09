@@ -20,38 +20,51 @@
         android:id="@+id/txtViewHello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="64dp"
         android:text="@string/txtHello"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.172"
+        app:layout_constraintHorizontal_bias="0.177"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/txtViewAbout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txtAboutApp"
+        android:textColor="@color/offwhite"
+        android:textStyle="normal|italic"
+
+        app:layout_constraintBottom_toTopOf="@+id/cardViewInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.135"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewHello"
+        app:layout_constraintVertical_bias="0.68" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewInfo"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="20dp"
+        android:layout_width="377dp"
+        android:layout_height="275dp"
+        app:cardBackgroundColor="@color/offcharcoal"
         app:cardCornerRadius="20dp"
         app:cardElevation="10dp"
-        android:background="@color/offcharcoal"
+        app:layout_constraintBottom_toTopOf="@+id/btnViewAR"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnViewAR">
+        app:layout_constraintTop_toBottomOf="@+id/txtViewHello">
 
         <TextView
             android:id="@+id/txtViewInfo"
-            android:layout_width="376dp"
-            android:layout_height="181dp"
+            android:layout_width="377dp"
+            android:layout_height="215dp"
             android:layout_gravity="center|center_horizontal"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:text="@string/txtSlide1"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -71,44 +84,48 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/btnLogOut"
-        android:layout_width="207dp"
-        android:layout_height="38dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="28dp"
-        android:layout_weight="0.33"
-        android:text="@string/txtLogout"
-        android:textColor="@color/white"
-        app:backgroundTint="@color/purple_new"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
-
-    <Button
         android:id="@+id/btnViewAR"
-        android:layout_width="187dp"
-        android:layout_height="229dp"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="176dp"
+        android:layout_height="69dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginBottom="120dp"
         android:layout_weight="0.33"
         android:text="@string/txtViewAr"
         android:textColor="@color/white"
         app:backgroundTint="@color/purple_new"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewHello" />
+        app:icon="@drawable/ic_baseline_3d_rotation_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnPlanVenue"
-        android:layout_width="189dp"
-        android:layout_height="224dp"
-        android:layout_marginTop="60dp"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="169dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="120dp"
         android:layout_weight="0.33"
         android:text="@string/txtPlanVenue"
         android:textColor="@color/white"
         app:backgroundTint="@color/purple_new"
+        app:icon="@drawable/ic_baseline_create_24"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnViewAR"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewHello" />
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toEndOf="@+id/btnViewAR" />
+
+    <ImageButton
+        android:id="@+id/imgBtnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/charcoal"
+        app:layout_constraintBottom_toTopOf="@+id/cardViewInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.901"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.439"
+        app:srcCompat="@drawable/ic_baseline_logout_24" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

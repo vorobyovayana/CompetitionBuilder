@@ -4,12 +4,10 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
-import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.WindowManager
 import android.view.animation.DecelerateInterpolator
 import android.widget.Button
 import androidx.appcompat.widget.AppCompatTextView
@@ -18,8 +16,9 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.ColorUtils
 import com.example.competitionbuilder.MainActivity
 import com.example.competitionbuilder.R
+import com.google.firebase.auth.FirebaseAuth
 
-class PopUpWindow : AppCompatActivity() {
+class SaveLayoutPopUp : AppCompatActivity() {
     private var popupTitle = ""
     private var popupText = ""
     private var popupButton = ""
@@ -36,6 +35,8 @@ class PopUpWindow : AppCompatActivity() {
     var rectViewHeight = 0
     var oneMeter = 0F
     var numStrips = 0
+    lateinit var firebaseAuth: FirebaseAuth
+    lateinit var email: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // disable Activity’s open/close animation
@@ -67,6 +68,8 @@ class PopUpWindow : AppCompatActivity() {
         popup_window_button.text = popupButton
 
         popup_window_background = findViewById(R.id.popup_window_background)
+        firebaseAuth = FirebaseAuth.getInstance()
+        email = firebaseAuth.currentUser!!.email.toString()
 
         val alpha = 100 //between 0-255
         val alphaColor = ColorUtils.setAlphaComponent(Color.parseColor("#000000"), alpha)
@@ -127,7 +130,8 @@ class PopUpWindow : AppCompatActivity() {
             }
         })
         colorAnimation.start()
-        val intent = Intent(this, LayoutActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("email", email)
         startActivity(intent)
     }
 

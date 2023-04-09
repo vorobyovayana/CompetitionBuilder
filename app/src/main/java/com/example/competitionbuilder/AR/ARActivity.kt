@@ -18,6 +18,7 @@ import com.google.ar.core.Anchor
 import com.google.ar.core.HitResult
 import com.google.ar.core.Plane
 import com.google.ar.sceneform.AnchorNode
+import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.ux.ArFragment
 import com.google.ar.sceneform.ux.TransformableNode
@@ -75,6 +76,26 @@ class ARActivity : AppCompatActivity() {
         model.select()
     }
 
+
+
+
+//    private fun addModel(anchor: Anchor, modelRenderable: ModelRenderable, distance: Float) {
+//        val anchorNode = AnchorNode(anchor)
+//        // Creating a AnchorNode with a specific anchor
+//        anchorNode.setParent(arCam!!.arSceneView.scene)
+//        //attaching the anchorNode with the ArFragment
+//
+//        // Move the anchorNode away from the camera by adjusting the translation along the z-axis
+//        anchorNode.localPosition = Vector3(0f, -1f, -distance)
+//
+//        val model = TransformableNode(arCam!!.transformationSystem)
+//        model.setParent(anchorNode)
+//        //attaching the anchorNode with the TransformableNode
+//        model.renderable = modelRenderable
+//        //attaching the 3d model with the TransformableNode that is already attached with the node
+//        model.select()
+//    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_aractivity)
@@ -92,7 +113,7 @@ class ARActivity : AppCompatActivity() {
                 if (clickNo == 1) {
                     val anchor = hitResult.createAnchor()
                     ModelRenderable.builder()
-                        .setSource(this, R.raw.piste_basic_katushki_sm2)
+                        .setSource(this, R.raw.piste_basic_katushki_sm3_lower)
                         .setIsFilamentGltf(true)
                         .build()
                         .thenAccept(Consumer { modelRenderable: ModelRenderable? ->

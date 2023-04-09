@@ -1,30 +1,36 @@
 package com.example.competitionbuilder.VenuePlan
 
+
 import MyCustomTouchListener
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.text.format.DateFormat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
-import android.view.MotionEvent
 import android.view.View
 import android.widget.RelativeLayout
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import com.example.competitionbuilder.CustomTouchListeners.CustomTouchListener
-
-
 import com.example.competitionbuilder.CustomViews.PisteView
 import com.example.competitionbuilder.CustomViews.RectangleView
 import com.example.competitionbuilder.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.io.File
-import java.io.FileOutputStream
+import java.util.*
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.*
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class LayoutActivity : AppCompatActivity() {
     var width = 0F
@@ -38,8 +44,12 @@ class LayoutActivity : AppCompatActivity() {
     private lateinit var pisteView: PisteView
     private lateinit var btnAdd: FloatingActionButton
     private lateinit var btnNext: FloatingActionButton
+    private lateinit var btnRestart: FloatingActionButton
+   //    private lateinit var holder: RelativeLayout
+    private lateinit var parentView: RelativeLayout
     var position : Boolean = false
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +67,7 @@ class LayoutActivity : AppCompatActivity() {
         rectViewHeight = Intent1.getIntExtra("rectViewHeight", 0)
         numStrips = Intent1.getIntExtra("numStrips", 0)
 
+
         val rectangle = findViewById<RectangleView>(R.id.rectangle_view)
         pisteView = findViewById(R.id.piste_view)
         rectangle.setDimensions(width, height)
@@ -70,6 +81,7 @@ class LayoutActivity : AppCompatActivity() {
 
         pisteView.setOneMeter(oneMeter)
         pisteView.setDimensions(17f, 3f)
+        numStrips -=1
 
         // position = true -- means the piste is positioned horizontally,
         // false -- vertically
@@ -97,11 +109,35 @@ class LayoutActivity : AppCompatActivity() {
                 }
 
             }
+
+            override fun onLongClick() {
+                super.onLongClick()
+                try {
+//                    val intent = Intent(pisteView.context, PopUpWindow::class.java)
+//
+//                    intent.putExtra("popuptitle", "Delete piste?")
+//                    intent.putExtra("popuptext", "Would you like to delete this piste?")
+//                    intent.putExtra("popupbtn", "Yes")
+//                    intent.putExtra("darkstatusbar", false)
+//                    intent.putExtra("width", width)
+//                    intent.putExtra("height", height)
+//                    intent.putExtra("rectViewWidth", rectViewWidth)
+//                    intent.putExtra("rectViewHeight", rectViewHeight)
+//                    intent.putExtra("numStrips", numStrips)
+//
+//                    pisteView.context.startActivity(intent)
+
+
+                }
+                catch (ex: Exception){
+                    ex.printStackTrace()
+                }
+            }
+
         })
 
 
-
-        val parentView = findViewById<RelativeLayout>(R.id.parentView)
+        parentView = findViewById<RelativeLayout>(R.id.parentView)
         btnAdd = findViewById(R.id.fabAdd)
         btnAdd.setOnClickListener {
             Log.d("AddView", "Attempt to add a view detected")
@@ -127,15 +163,16 @@ class LayoutActivity : AppCompatActivity() {
                     RelativeLayout.LayoutParams.MATCH_PARENT
                 )
             )
-            parentView.addView(newPisteView, parentView.childCount - 1)
-            newPisteView.setOneMeter(oneMeter)
-            newPisteView.setDimensions(17f, 3f)
-            newPisteView.layoutParams = layoutParams
 
             if(numStrips>0){
                 numStrips-=1
+                parentView.addView(newPisteView, parentView.childCount - 1)
+                newPisteView.setOneMeter(oneMeter)
+                newPisteView.setDimensions(17f, 3f)
+                newPisteView.layoutParams = layoutParams
                 val pistesLeft = numStrips.toString()+ " left"
                 Toast.makeText(this, pistesLeft, Toast.LENGTH_SHORT).show()
+
             }
             else{
                 Toast.makeText(this, "No more pistes left, use the ones that you already have!", Toast.LENGTH_SHORT).show()
@@ -161,19 +198,43 @@ class LayoutActivity : AppCompatActivity() {
                     }
 
                 }
+
+//                override fun onLongClick() {
+//                    super.onLongClick()
+//                    try {
+//                        val intent = Intent(pisteView.context, PopUpWindow::class.java)
+//                        intent.putExtra("popuptitle", "Delete piste?")
+//                        intent.putExtra("popuptext", "Would you like to delete this piste?")
+//                        intent.putExtra("popupbtn", "Yes")
+//                        intent.putExtra("darkstatusbar", false)
+//                        intent.putExtra("width", width)
+//                        intent.putExtra("height", height)
+//                        intent.putExtra("rectViewWidth", rectangle.measuredWidth)
+//                        intent.putExtra("rectViewHeight", rectangle.measuredHeight)
+//                        intent.putExtra("numStrips", numStrips)
+//
+//                        pisteView.context.startActivity(intent)
+//                    }
+//                    catch (ex: Exception){
+//                        ex.printStackTrace()
+//                    }
+//                }
             })
         }
         btnNext = findViewById(R.id.fabNext)
         btnNext.setOnClickListener{
             saveLayout()
-            val intent = Intent(this, PopUpWindow::class.java)
-            intent.putExtra("popuptitle", "All done!")
-            intent.putExtra("popuptext", "Click OK to go to the home page")
-            intent.putExtra("popupbtn", "OK")
-            intent.putExtra("darkstatusbar", false)
-            startActivity(intent)
+
+            //savedBitmapFromViewToFile()
+//            val intent = Intent(this, SaveLayoutPopUp::class.java)
+//            intent.putExtra("popuptitle", "All done!")
+//            intent.putExtra("popuptext", "Click OK to go to the home page")
+//            intent.putExtra("popupbtn", "OK")
+//            intent.putExtra("darkstatusbar", false)
+//            startActivity(intent)
 
         }
+
 
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -187,14 +248,16 @@ class LayoutActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun saveLayout(){
         val rootView = window.decorView.rootView
         rootView.isDrawingCacheEnabled = true
         val bitmap = Bitmap.createBitmap(rootView.drawingCache)
         val directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+        val current = LocalDateTime.now().format(formatter)
         rootView.isDrawingCacheEnabled = false
-        val file = File(directory, "layout_image.jpg")
+        val file = File(directory, "layout_"+current+".jpg")
         val outputStream = FileOutputStream(file)
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
         outputStream.flush()
@@ -205,7 +268,4 @@ class LayoutActivity : AppCompatActivity() {
 
     }
 
-
-
 }
-
