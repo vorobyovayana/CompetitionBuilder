@@ -76,7 +76,21 @@
             android:layout_marginBottom="47dp"
             android:clickable="true"
             app:backgroundTint="@color/offcharcoal"
-            app:srcCompat="@drawable/ic_baseline_save_alt_24" />
+            app:srcCompat="@drawable/ic_baseline_check_24" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/piste_view"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="180dp"
+            android:layout_marginEnd="173dp"
+            android:layout_marginBottom="24dp"
+            android:clickable="true"
+            app:backgroundTint="@color/offcharcoal"
+            app:srcCompat="@drawable/ic_baseline_home_24" />
 
 
     </RelativeLayout>

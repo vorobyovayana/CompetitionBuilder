@@ -35,6 +35,7 @@ class SaveLayoutPopUp : AppCompatActivity() {
     var rectViewHeight = 0
     var oneMeter = 0F
     var numStrips = 0
+
     lateinit var firebaseAuth: FirebaseAuth
     lateinit var email: String
     override fun onCreate(savedInstanceState: Bundle?) {

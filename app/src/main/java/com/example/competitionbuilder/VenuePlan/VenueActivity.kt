@@ -27,6 +27,8 @@ class VenueActivity : AppCompatActivity() {
     private lateinit var btnGoToStrips: Button
     private lateinit var rectangle: RectangleView
 
+
+
     // Dimensions of the future rectangle
     var width = 0F;
     var height = 0F;

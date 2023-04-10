@@ -17,8 +17,10 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.example.competitionbuilder.CustomViews.PisteView
 import com.example.competitionbuilder.CustomViews.RectangleView
+import com.example.competitionbuilder.MainActivity
 import com.example.competitionbuilder.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.io.*
@@ -36,7 +38,7 @@ class LayoutActivity : AppCompatActivity() {
     private lateinit var pisteView: PisteView
     private lateinit var btnAdd: FloatingActionButton
     private lateinit var btnNext: FloatingActionButton
-    private lateinit var btnRestart: FloatingActionButton
+    private lateinit var btnHome: FloatingActionButton
    //    private lateinit var holder: RelativeLayout
     private lateinit var parentView: RelativeLayout
     var position : Boolean = false
@@ -213,20 +215,34 @@ class LayoutActivity : AppCompatActivity() {
 //                }
             })
         }
-
+        btnHome = findViewById<FloatingActionButton>(R.id.fabHome)
+        btnHome.isVisible=false
         btnNext = findViewById(R.id.fabNext)
         // Save layout to image when
         btnNext.setOnClickListener{
-            saveLayout()
+            try {
+
+                Toast.makeText(this, "Congrats, your layout is ready! Feel free to take a screenshot to save your layout. Click on the home button to return to the main page ", Toast.LENGTH_SHORT).show()
+                btnHome.isVisible = true
+                btnHome.setOnClickListener {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+
+                }
+            }catch (ex: Exception){
+                ex.printStackTrace()
+            }
             //savedBitmapFromViewToFile()
-            val intent = Intent(this, SaveLayoutPopUp::class.java)
-            intent.putExtra("popuptitle", "All done!")
-            intent.putExtra("popuptext", "Click OK to go to the home page")
-            intent.putExtra("popupbtn", "OK")
-            intent.putExtra("darkstatusbar", false)
-            startActivity(intent)
+//            val intent = Intent(this, SaveLayoutPopUp::class.java)
+//            intent.putExtra("popuptitle", "All done!")
+//            intent.putExtra("popuptext", "Click OK to go to the home page")
+//            intent.putExtra("popupbtn", "OK")
+//            intent.putExtra("darkstatusbar", false)
+//            startActivity(intent)
         }
+
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
@@ -240,29 +256,29 @@ class LayoutActivity : AppCompatActivity() {
     }
 
     // Method to save the screen to a jpeg
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun saveLayout(){
-        //  Get the view
-        val rootView = window.decorView.rootView
-        // Enable Drawing Cache
-        rootView.isDrawingCacheEnabled = true
-        // Create the bitmap from the drawing cahce
-        val bitmap = Bitmap.createBitmap(rootView.drawingCache)
-        // Get the directory
-        val directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-        // Format the date and time
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
-        val current = LocalDateTime.now().format(formatter)
-        // Disable the drawing cache for rootView
-        rootView.isDrawingCacheEnabled = false
-        // Create the file
-        val file = File(directory, "layout_"+current+".jpg")
-        val outputStream = FileOutputStream(file)
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
-        outputStream.flush()
-        outputStream.close()
-        Toast.makeText(this, "Layout image saved successfully", Toast.LENGTH_SHORT).show()
-        outputStream.close()
-        bitmap.recycle()
-    }
+//    @RequiresApi(Build.VERSION_CODES.O)
+//    fun saveLayout(){
+//        //  Get the view
+//        val rootView = window.decorView.rootView
+//        // Enable Drawing Cache
+//        rootView.isDrawingCacheEnabled = true
+//        // Create the bitmap from the drawing cahce
+//        val bitmap = Bitmap.createBitmap(rootView.drawingCache)
+//        // Get the directory
+//        val directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+//        // Format the date and time
+//        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+//        val current = LocalDateTime.now().format(formatter)
+//        // Disable the drawing cache for rootView
+//        rootView.isDrawingCacheEnabled = false
+//        // Create the file
+//        val file = File(directory, "layout_"+current+".jpg")
+//        val outputStream = FileOutputStream(file)
+//        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+//        outputStream.flush()
+//        outputStream.close()
+//        Toast.makeText(this, "Layout image saved successfully", Toast.LENGTH_SHORT).show()
+//        outputStream.close()
+//        bitmap.recycle()
+//    }
 }
